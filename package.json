@@ -2,12 +2,12 @@
   "name": "puncher",
   "version": "1.0.0",
   "description": "A nice punching of characters and images.",
-  "main": "index.js",
+  "main": "lib/puncher.js",
   "scripts": {
     "test": "karma start karma.conf.js",
     "lint": "souffle",
     "dist:lib": "babel src -d lib",
-    "dist:js": "browserify -t babelify src/index.js > puncher.js && uglifyjs puncher.js > puncher.min.js"
+    "dist:js": "browserify -t babelify src/puncher.js > puncher.js && uglifyjs puncher.js > puncher.min.js"
   },
   "repository": {
     "type": "git",
