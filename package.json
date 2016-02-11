@@ -7,7 +7,8 @@
     "test": "karma start karma.conf.js",
     "lint": "souffle",
     "dist:lib": "babel src -d lib",
-    "dist:js": "browserify -t babelify src/puncher.js > puncher.js && uglifyjs puncher.js > puncher.min.js"
+    "dist:js": "browserify -t babelify src/puncher.js > puncher.js && uglifyjs puncher.js > puncher.min.js",
+    "demo": "npm run dist:js && open demo/index.html"
   },
   "repository": {
     "type": "git",
