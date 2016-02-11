@@ -1,3 +1,18 @@
+<!doctype html>
+<style>* { font-family: menlo; }</style>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/class-component/dist.min.js"></script>
+<script src="node_modules/cc-event/cc-event.js"></script>
 <script src="puncher.js"></script>
+<script>$(function () {
+    setTimeout(function () {
+        $('div').trigger('puncher')
+    }, 500)
+})</script>
+
+<div class="puncher" unit-dur="420">
+    Hello, world<br />
+    Hello, world<br />
+    Hello, world<br />
+    Hello, world<br />
+</div>

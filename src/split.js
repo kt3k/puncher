@@ -22,20 +22,24 @@ export default nodes => {
 
     Array.prototype.forEach.call(nodes, node => {
 
-        if (node.nodeType) {
-
-            array.push(...splitText(node))
-        }
-
         if (node.nodeType === 3) {
 
-            array.push(node)
+            array.push(...splitText(node))
+
+        } else if (node.nodeType === 1) {
+
+            array.push(node.outerHTML)
+
+        } else {
+
+            throw new Error('invalid node.nodeType: ' + node.nodeType)
 
         }
 
-        throw new Error('invalid input: ' + nodes.toString())
-
     })
+
+    if (array[0] === ' ') { array.shift() }
+    if (array[array.length - 1] === ' ') { array.pop() }
 
     return array
 
@@ -50,7 +54,7 @@ export default nodes => {
 const splitText = (textNode) => {
 
     const rawText = textNode.nodeValue
-    const text = rawText.replace(/^\s*|\s*$/g, '').replace(/\s+/g, ' ')
+    const text = rawText.replace(/\s+/g, ' ')
 
     if (rawText.length === 0) {
 

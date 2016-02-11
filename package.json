@@ -49,14 +49,15 @@
   },
   "babel": {
     "presets": [
-      "decorators-legacy",
-      "es2015"
+      "es2015",
+      "decorators-legacy"
     ]
   },
   "souffle": {
     "parser": "babel-eslint",
     "ignore": [
-      "karma.conf.js"
+      "karma.conf.js",
+      "puncher.js"
     ],
     "globals": ["$", "describe", "it", "expect"]
   }
