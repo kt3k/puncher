@@ -4,7 +4,10 @@
   "description": "A nice punching of characters and images.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start karma.conf.js",
+    "lint": "souffle",
+    "dist:lib": "babel src -d lib",
+    "dist:js": "browserify -t babelify src/index.js > puncher.js && uglifyjs puncher.js > puncher.min.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +23,41 @@
   "bugs": {
     "url": "https://github.com/kt3k/puncher/issues"
   },
-  "homepage": "https://github.com/kt3k/puncher#readme"
+  "homepage": "https://github.com/kt3k/puncher#readme",
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-eslint": "^4.1.8",
+    "babel-preset-decorators-legacy": "^1.0.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babelify": "^7.2.0",
+    "browserify-istanbul": "^0.2.1",
+    "cc-event": "^2.0.2",
+    "chai": "^3.5.0",
+    "class-component": "^5.5.4",
+    "isparta": "^4.0.0",
+    "jquery": "^2.2.0",
+    "karma": "^0.13.19",
+    "karma-browserify": "^5.0.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "^0.5.3",
+    "karma-mocha": "^0.2.1",
+    "mocha": "^2.4.5",
+    "souffle-cli": "^3.1.0",
+    "uglify-js": "^2.6.1",
+    "watchify": "^3.7.0"
+  },
+  "babel": {
+    "presets": [
+      "decorators-legacy",
+      "es2015"
+    ]
+  },
+  "souffle": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "karma.conf.js"
+    ],
+    "globals": ["$", "describe", "it", "expect"]
+  }
 }

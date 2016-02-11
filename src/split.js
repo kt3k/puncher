@@ -33,7 +33,7 @@ export default nodes => {
 
         }
 
-        throw new Error('invalid input: ' + nodes.toString());
+        throw new Error('invalid input: ' + nodes.toString())
 
     })
 
