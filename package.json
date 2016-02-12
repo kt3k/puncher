@@ -4,7 +4,7 @@
   "description": "A nice punching of characters and images.",
   "main": "lib/puncher.js",
   "scripts": {
-    "clean": "rimraf puncher.* lib",
+    "clean": "rimraf coverage puncher.* lib",
     "test": "karma start karma.conf.js",
     "lint": "souffle",
     "dist:lib": "babel src -d lib",
