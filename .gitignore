@@ -6,3 +6,5 @@
 
 # dist
 /lib
+/puncher.js
+/puncher.min.js

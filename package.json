@@ -8,6 +8,7 @@
     "lint": "souffle",
     "dist:lib": "babel src -d lib",
     "dist:js": "browserify -t babelify src/puncher.js > puncher.js && uglifyjs puncher.js > puncher.min.js",
+    "prepublish": "npm run dist:lib && npm run dist:js",
     "demo": "npm run dist:js && open demo/index.html"
   },
   "repository": {
