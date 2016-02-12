@@ -1,14 +1,14 @@
 module.exports = function(config) {
   config.set({
     frameworks: ['mocha', 'chai', 'browserify'],
-    files: ['spec/**/*.js'],
-    preprocessors: {'spec/**/*.js': ['browserify']},
+    files: ['spec/helper.js', 'spec/*.js'],
+    preprocessors: {'spec/*.js': ['browserify']},
     browserify: {
       debug: true,
-      transform: [/*require('browserify-istanbul')({
+      transform: [require('browserify-istanbul')({
         instrumenter: require('isparta'),
-        ignore: ['** /spec/**']
-      }),*/ 'babelify']
+        ignore: ['**/spec/**']
+      }), 'babelify']
     },
     reporters: ['progress', 'coverage'],
     coverageReporter: {type: 'lcov'},

@@ -21,28 +21,46 @@ export class Puncher extends Coelement {
 
         this.elem.empty()
 
-        this.unitDur = +this.elem.data('unit-dur') || DEFAULT_UNIT_DUR
+        this.unitDur = +this.elem.attr('unit-dur') || DEFAULT_UNIT_DUR
 
     }
 
+    /**
+     * Starts punching the characters and elements. Returns promise which resolves when all the punching finished.
+     *
+     * @return {Promise}
+     */
     @event(MODULE_NAME)
     start() {
 
-        this.loop()
+        return new Promise(resolve => this.loop(resolve))
 
     }
 
-    loop() {
+    /**
+     * Steps the loop, invokes itself if loop isn't finished, callbacks when finished.
+     *
+     * @param {Function} cb The callback
+     */
+    loop(cb) {
 
+        // finish immediately if the array is empty
         if (this.array.length === 0) {
 
-            return
+            return cb()
 
         }
 
         this.elem.append(this.array.shift())
 
-        setTimeout(() => this.loop(), this.unitDur)
+        // finish immediately if the array is empty
+        if (this.array.length === 0) {
+
+            return cb()
+
+        }
+
+        setTimeout(() => this.loop(cb), this.unitDur)
 
     }
 
