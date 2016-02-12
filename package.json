@@ -4,11 +4,12 @@
   "description": "A nice punching of characters and images.",
   "main": "lib/puncher.js",
   "scripts": {
+    "clean": "rimraf puncher.* lib",
     "test": "karma start karma.conf.js",
     "lint": "souffle",
     "dist:lib": "babel src -d lib",
     "dist:js": "browserify -t babelify src/puncher.js > puncher.js && uglifyjs puncher.js > puncher.min.js",
-    "prepublish": "npm run dist:lib && npm run dist:js",
+    "prepublish": "npm run clean && npm run dist:lib && npm run dist:js",
     "demo": "npm run dist:js && open demo/index.html"
   },
   "repository": {
