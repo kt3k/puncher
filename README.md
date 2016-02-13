@@ -1,4 +1,4 @@
-# puncher v1.1.0
+# puncher v2.0.0
 
 > A nice punching of characters and images.
 
