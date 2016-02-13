@@ -65,6 +65,20 @@ describe('puncher', () => {
 
         })
 
+        it('returns immediately resolved promise if the content text is empty', () => {
+
+            const pchr = $('<div></div>').cc.init('puncher')
+
+            return pchr.start()
+
+        })
+
+        it('triggers the punched event when an element is appended', (done) => {
+
+            $('<div><i></i></div>').on('punched', () => done()).cc.init('puncher').start()
+
+        })
+
     })
 
 })

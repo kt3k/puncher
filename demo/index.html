@@ -12,25 +12,48 @@
         height: 1.4em;
         display: inline-block;
     }
+
+    .foo {
+        opacity: 0;
+        transition-duration: 600ms;
+    }
 </style>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/class-component/dist.min.js"></script>
 <script src="../node_modules/cc-event/cc-event.js"></script>
 <script src="../puncher.js"></script>
-<script>$(function () {
-    setTimeout(function () {
-        $('div').trigger('puncher')
-    }, 500)
-})</script>
+<script>
+
+    $(function () {
+        setTimeout(function () {
+            $('div').trigger('puncher')
+        }, 500)
+    })
+
+    $.cc.component('foo')($.cc.subclass($.cc.Coelement, function (pt) {
+
+        pt.punched = function () {
+
+            var elem = this.elem
+
+            setTimeout(function () {
+                elem.css('opacity', 1);
+            }, 100)
+
+        }.event('punched')
+
+    }))
+
+</script>
 
 <div class="puncher" unit-dur="150">
-    Hello, world <i></i><br />
-    Hello, world <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i><br />
-    Hello, world <i></i><i></i><i></i><i></i><i></i><i></i><i></i><br />
-    Hello, world <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i><br />
-    Hello, world <i></i><i></i><i></i><i></i><i></i><i></i><i></i><br />
-    Hello, world <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i><br />
-    Hello, world <i></i><i></i><i></i><i></i><i></i><i></i><i></i><br />
-    Hello, world <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i><br />
-    Hello, world <i></i><i></i><i></i><i></i><i></i><i></i><i></i><br />
+    Hello, world <i class="foo"></i><br />
+    Hello, world <i class="foo"></i><i class="foo"></i><i class="foo"></i><i class="foo"></i><i class="foo"></i><br />
+    Hello, world <i class="foo"></i> <i class="foo"></i> <i class="foo"></i> <i class="foo"></i> <i class="foo"></i><br />
+    Hello, world <i class="foo"></i><i class="foo"></i><i class="foo"></i><i class="foo"></i><i class="foo"></i><br />
+    Hello, world <i class="foo"></i> <i class="foo"></i> <i class="foo"></i> <i class="foo"></i> <i class="foo"></i><br />
+    Hello, world <i class="foo"></i><i class="foo"></i><i class="foo"></i><i class="foo"></i><i class="foo"></i><br />
+    Hello, world <i class="foo"></i> <i class="foo"></i> <i class="foo"></i> <i class="foo"></i> <i class="foo"></i><br />
+    Hello, world <i class="foo"></i><i class="foo"></i><i class="foo"></i><i class="foo"></i><i class="foo"></i><br />
+    Hello, world <i class="foo"></i> <i class="foo"></i> <i class="foo"></i> <i class="foo"></i> <i class="foo"></i><br />
 </div>
