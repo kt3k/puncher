@@ -21,7 +21,7 @@ This prints `Hello, world!` letter by letter. Each letter displays with 120ms de
 
 In command line:
 
-    npm install jquery class-component cc-event puncher
+    npm install jquery class-component cc-event @kt3k/puncher
 
 In script:
 
@@ -29,7 +29,7 @@ In script:
 global.jQuery = require('jquery')
 require('class-component')
 require('cc-event')
-require('puncher')
+require('@kt3k/puncher')
 ```
 
 In html:
