@@ -1,6 +1,6 @@
 {
   "name": "@kt3k/puncher",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A nice punching of characters and images.",
   "main": "lib/puncher.js",
   "scripts": {

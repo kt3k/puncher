@@ -1,5 +1,5 @@
 /**
- * puncher v2.0.1
+ * puncher v2.0.2
  * author: Yoshiya Hinosawa ( https://github.com/kt3k )
  * license: MIT
  */
