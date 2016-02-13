@@ -12,10 +12,10 @@
 <script src="path/to/cc-event"></script>
 <script src="path/to/puncher"></script>
 
-<div class="puncher" unit-dur="120">Hello, world!</div>
+<div class="puncher" unit-dur="120">Hello, world! <img src="foo.png" /></div>
 ```
 
-This prints `Hello, world!` letter by letter. Each letter displays with 120ms delay from the previous letter. This timing is configurable with the `unit-dur` attributes of the above example.
+This prints `Hello, world!` letter by letter and the image "foo.png". Each letter displays with 120ms delay from the previous letter. This timing is configurable with the `unit-dur` attributes of the above example. The image tag (or any other tag) counts as a single character.
 
 ### Via npm
 
@@ -35,10 +35,10 @@ require('@kt3k/puncher')
 In html:
 
 ```html
-<div class="puncher" unit-dur="120">Hello, world!</div>
+<div class="puncher" unit-dur="120">Hello, world! <img src="foo.png" /></div>
 ```
 
-This prints `Hello, world!` letter by letter. Each letter displays with 120ms delay from the previous letter. This timing is configurable with the `unit-dur` attributes of the above example.
+This prints `Hello, world!` letter by letter and the image "foo.png". Each letter displays with 120ms delay from the previous letter. This timing is configurable with the `unit-dur` attributes of the above example. The image tag (or any other tag) counts as a single character.
 
 # LICENSE
 
