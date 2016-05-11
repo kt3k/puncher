@@ -8,8 +8,10 @@ import split from './split'
 const {event, component, Coelement} = $.cc
 
 const MODULE_NAME = 'puncher'
-const START_EVENT_NAME = 'puncher'
-const APPENDED_EVENT_NAME = 'punched'
+const START_EVENT_NAME = 'puncher.start'
+const STARTED_EVENT_NAME = 'puncher.started'
+const ENDED_EVENT_NAME = 'puncher.ended'
+const APPENDED_EVENT_NAME = 'puncher.appended'
 const DEFAULT_UNIT_DUR = 100
 
 @component(MODULE_NAME)
@@ -35,6 +37,8 @@ export class Puncher extends Coelement {
     @event(START_EVENT_NAME)
     start() {
 
+        this.elem.trigger(STARTED_EVENT_NAME)
+
         // finish immediately if the array is empty
         if (this.array.length === 0) {
 
@@ -42,7 +46,11 @@ export class Puncher extends Coelement {
 
         }
 
-        return new Promise(resolve => this.loop(resolve))
+        return new Promise(resolve => this.loop(resolve)).then(() => {
+
+            this.elem.trigger(ENDED_EVENT_NAME)
+
+        })
 
     }
 
