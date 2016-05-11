@@ -1,0 +1,11 @@
+# npm
+/node_modules
+
+# coverage
+/coverage
+
+# src
+/src
+/spec
+/demo
+/karma.conf.js
