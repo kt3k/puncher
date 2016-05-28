@@ -22,7 +22,7 @@ describe('split', () => {
 
     it('throws when the nodes contains node of nodeType != 1 or 3', () => {
 
-        expect(() => split([{nodeType: 2}])).to.throw();
+        expect(() => split([{nodeType: 2}])).to.throw()
 
     })
 
