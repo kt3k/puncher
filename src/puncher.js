@@ -5,7 +5,7 @@
  */
 import split from './split'
 
-const {event, component, Coelement} = $.cc
+const {event, component} = $.cc
 
 const MODULE_NAME = 'puncher'
 const START_EVENT_NAME = 'puncher.start'
@@ -15,16 +15,14 @@ const APPENDED_EVENT_NAME = 'puncher.appended'
 const DEFAULT_UNIT_DUR = 100
 
 @component(MODULE_NAME)
-export class Puncher extends Coelement {
+export class Puncher {
 
     constructor(elem) {
-        super(elem)
+        this.array = split(elem[0].childNodes)
 
-        this.array = split(this.elem[0].childNodes)
+        elem.empty()
 
-        this.elem.empty()
-
-        this.unitDur = +this.elem.attr('unit-dur') || DEFAULT_UNIT_DUR
+        this.unitDur = +elem.attr('unit-dur') || DEFAULT_UNIT_DUR
     }
 
     /**
