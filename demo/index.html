@@ -19,8 +19,7 @@
     }
 </style>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../node_modules/class-component/dist.min.js"></script>
-<script src="../node_modules/cc-event/cc-event.js"></script>
+<script src="../node_modules/class-component/dist/class-component.min.js"></script>
 <script src="../puncher.js"></script>
 <script>
 
@@ -30,19 +29,20 @@
         }, 500)
     })
 
-    $.cc.component('foo')($.cc.subclass($.cc.Coelement, function (pt) {
+    class Foo {
 
-        pt.punched = function () {
+        constructor(elem) {
+            elem.on('puncher.appended', () => this.punched())
+        }
 
-            var elem = this.elem
-
-            setTimeout(function () {
-                elem.css('opacity', 1);
+        punched() {
+            setTimeout(() => {
+                this.elem.css('opacity', 1);
             }, 100)
+        }
+    }
 
-        }.event('puncher.appended')
-
-    }))
+    $.cc('foo', Foo)
 
 </script>
 
