@@ -5,7 +5,7 @@
  */
 import split from './split'
 
-const {event, component} = $.cc
+const {on, component} = $.cc
 
 const MODULE_NAME = 'puncher'
 const START_EVENT_NAME = 'puncher.start'
@@ -16,7 +16,9 @@ const DEFAULT_UNIT_DUR = 100
 
 @component(MODULE_NAME)
 export class Puncher {
-
+    /**
+     * @param {jQuery} elem The dom selection of jQuery object
+     */
     constructor(elem) {
         this.array = split(elem[0].childNodes)
 
@@ -27,18 +29,15 @@ export class Puncher {
 
     /**
      * Starts punching the characters and elements. Returns promise which resolves when all the punching finished.
-     *
      * @return {Promise}
      */
-    @event(START_EVENT_NAME)
+    @on(START_EVENT_NAME)
     start() {
         this.elem.trigger(STARTED_EVENT_NAME)
 
         // finish immediately if the array is empty
         if (this.array.length === 0) {
-
             return Promise.resolve()
-
         }
 
         return new Promise(resolve => this.loop(resolve)).then(() => {

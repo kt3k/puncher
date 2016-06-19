@@ -29,7 +29,7 @@
   "homepage": "https://github.com/kt3k/puncher#readme",
   "peerDependencies": {
     "jquery": ">=2.0.0",
-    "class-component": ">=7.0.0"
+    "class-component": ">=9.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
@@ -39,7 +39,7 @@
     "babelify": "^7.2.0",
     "browserify-istanbul": "^0.2.1",
     "chai": "^3.5.0",
-    "class-component": "^8.0.0",
+    "class-component": "^9.2.3",
     "isparta": "^4.0.0",
     "jquery": "^2.2.0",
     "karma": "^0.13.19",
