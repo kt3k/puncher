@@ -17,32 +17,22 @@
  * @return {Array<String|HTMLElement>}
  */
 export default nodes => {
+  const array = []
 
-    const array = []
+  Array.prototype.forEach.call(nodes, node => {
+    if (node.nodeType === 3) {
+      array.push(...splitText(node))
+    } else if (node.nodeType === 1) {
+      array.push(node.outerHTML)
+    } else {
+      throw new Error('invalid node.nodeType: ' + node.nodeType)
+    }
+  })
 
-    Array.prototype.forEach.call(nodes, node => {
+  if (array[0] === ' ') { array.shift() }
+  if (array[array.length - 1] === ' ') { array.pop() }
 
-        if (node.nodeType === 3) {
-
-            array.push(...splitText(node))
-
-        } else if (node.nodeType === 1) {
-
-            array.push(node.outerHTML)
-
-        } else {
-
-            throw new Error('invalid node.nodeType: ' + node.nodeType)
-
-        }
-
-    })
-
-    if (array[0] === ' ') { array.shift() }
-    if (array[array.length - 1] === ' ') { array.pop() }
-
-    return array
-
+  return array
 }
 
 /**
@@ -52,16 +42,12 @@ export default nodes => {
  * @return {Array<String>}
  */
 const splitText = (textNode) => {
+  const rawText = textNode.nodeValue
+  const text = rawText.replace(/\s+/g, ' ')
 
-    const rawText = textNode.nodeValue
-    const text = rawText.replace(/\s+/g, ' ')
+  if (rawText.length === 0) {
+    return []
+  }
 
-    if (rawText.length === 0) {
-
-        return []
-
-    }
-
-    return text.split('')
-
+  return text.split('')
 }

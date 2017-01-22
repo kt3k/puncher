@@ -1,4 +1,4 @@
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     frameworks: ['mocha', 'chai', 'browserify'],
     files: ['spec/helper.js', 'spec/*.js'],

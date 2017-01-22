@@ -5,7 +5,7 @@
  */
 import split from './split'
 
-const {on, component} = $.cc
+const { on, component } = $.cc
 
 const MODULE_NAME = 'puncher'
 const START_EVENT_NAME = 'puncher.start'
@@ -16,64 +16,63 @@ const DEFAULT_UNIT_DUR = 100
 
 @component(MODULE_NAME)
 export class Puncher {
-    /**
-     * @param {jQuery} elem The dom selection of jQuery object
-     */
-    constructor(elem) {
-        this.array = split(elem[0].childNodes)
 
-        elem.empty()
+  __init__ () {
+    const elem = this.$el
+    this.array = split(elem[0].childNodes)
 
-        this.unitDur = +elem.attr('unit-dur') || DEFAULT_UNIT_DUR
+    elem.empty()
+
+    this.unitDur = +elem.attr('unit-dur') || DEFAULT_UNIT_DUR
+  }
+
+  /**
+   * Starts punching the characters and elements. Returns promise which resolves when all the punching finished.
+   * @return {Promise}
+   */
+  @on(START_EVENT_NAME)
+  start () {
+    this.elem.trigger(STARTED_EVENT_NAME)
+
+    // finish immediately if the array is empty
+    if (this.array.length === 0) {
+      return Promise.resolve()
     }
 
-    /**
-     * Starts punching the characters and elements. Returns promise which resolves when all the punching finished.
-     * @return {Promise}
-     */
-    @on(START_EVENT_NAME)
-    start() {
-        this.elem.trigger(STARTED_EVENT_NAME)
+    return new Promise(resolve => this.loop(resolve)).then(() => {
+      this.elem.trigger(ENDED_EVENT_NAME)
+    })
+  }
 
-        // finish immediately if the array is empty
-        if (this.array.length === 0) {
-            return Promise.resolve()
-        }
+  /**
+   * Steps the loop, invokes itself if loop isn't finished, callbacks when finished.
+   * @param {Function} cb The callback
+   */
+  loop (cb) {
+    this.append(this.array.shift())
 
-        return new Promise(resolve => this.loop(resolve)).then(() => {
-            this.elem.trigger(ENDED_EVENT_NAME)
-        })
+    // finish immediately if the array is empty
+    if (this.array.length === 0) {
+      return cb()
     }
 
-    /**
-     * Steps the loop, invokes itself if loop isn't finished, callbacks when finished.
-     * @param {Function} cb The callback
-     */
-    loop(cb) {
-        this.append(this.array.shift())
+    setTimeout(() => this.loop(cb), this.unitDur)
+  }
 
-        // finish immediately if the array is empty
-        if (this.array.length === 0) {
-            return cb()
-        }
+  /**
+   * Appends the item into the element.
+   * @param {string} item The item
+   */
+  append (item) {
+    if (item.length === 1) {
+      // This is single character, just appends it
+      this.elem.append(item)
+    } else {
+      item = $(item)
 
-        setTimeout(() => this.loop(cb), this.unitDur)
+      this.elem.append(item)
+
+      item.cc().trigger(APPENDED_EVENT_NAME)
     }
-
-    /**
-     * Appends the item into the element.
-     * @param {string} item The item
-     */
-    append(item) {
-        if (item.length === 1) {
-            // This is single character, just appends it
-            this.elem.append(item)
-        } else {
-            item = $(item)
-
-            this.elem.append(item)
-
-            item.cc().trigger(APPENDED_EVENT_NAME)
-        }
-    }
+  }
 }
