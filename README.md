@@ -1,4 +1,4 @@
-# puncher v5.1.0
+# puncher v6.0.0
 
 > Punching characters and images.
 
