@@ -5,7 +5,7 @@
  */
 import split from './split'
 
-const { on, component } = $.cc
+const { on, component } = capsid
 
 const MODULE_NAME = 'puncher'
 const START_EVENT_NAME = 'puncher.start'
