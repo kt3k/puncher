@@ -8,22 +8,21 @@ import split from './split'
 const { on, component } = capsid
 
 const MODULE_NAME = 'puncher'
-const START_EVENT_NAME = 'puncher.start'
-const STARTED_EVENT_NAME = 'puncher.started'
-const ENDED_EVENT_NAME = 'puncher.ended'
-const APPENDED_EVENT_NAME = 'puncher.appended'
+const START_EVENT_NAME = 'puncher-start'
+const STARTED_EVENT_NAME = 'puncher-started'
+const ENDED_EVENT_NAME = 'puncher-ended'
+const APPENDED_EVENT_NAME = 'puncher-appended'
 const DEFAULT_UNIT_DUR = 100
 
 @component(MODULE_NAME)
 export class Puncher {
 
   __init__ () {
-    const elem = this.$el
-    this.array = split(elem[0].childNodes)
+    this.array = split(this.el.childNodes)
 
-    elem.empty()
+    this.$el.empty()
 
-    this.unitDur = +elem.attr('unit-dur') || DEFAULT_UNIT_DUR
+    this.unitDur = +this.el.getAttribute('unit-dur') || DEFAULT_UNIT_DUR
   }
 
   /**
@@ -32,7 +31,7 @@ export class Puncher {
    */
   @on(START_EVENT_NAME)
   start () {
-    this.elem.trigger(STARTED_EVENT_NAME)
+    this.el.dispatchEvent(new CustomEvent(STARTED_EVENT_NAME))
 
     // finish immediately if the array is empty
     if (this.array.length === 0) {
@@ -40,7 +39,7 @@ export class Puncher {
     }
 
     return new Promise(resolve => this.loop(resolve)).then(() => {
-      this.elem.trigger(ENDED_EVENT_NAME)
+      this.el.dispatchEvent(new CustomEvent(ENDED_EVENT_NAME))
     })
   }
 
@@ -66,13 +65,14 @@ export class Puncher {
   append (item) {
     if (item.length === 1) {
       // This is single character, just appends it
-      this.elem.append(item)
+      this.$el.append(item)
     } else {
       item = $(item)
 
-      this.elem.append(item)
+      this.$el.append(item)
 
-      item.cc().trigger(APPENDED_EVENT_NAME)
+      item.cc()
+      item[0].dispatchEvent(new CustomEvent(APPENDED_EVENT_NAME))
     }
   }
 }

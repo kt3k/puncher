@@ -26,14 +26,14 @@
 
     $(function () {
         setTimeout(function () {
-            document.querySelector('.puncher').dispatchEvent(new CustomEvent('puncher.start', { bubbles: true }))
+            document.querySelector('.puncher').dispatchEvent(new CustomEvent('puncher-start', { bubbles: true }))
         }, 500)
     })
 
     class Foo {
 
         __init__ () {
-            this.$el.on('puncher.appended', () => this.punched())
+            this.$el.on('puncher-appended', () => this.punched())
         }
 
         punched() {
