@@ -31,7 +31,7 @@ export class Puncher {
    */
   @on(START_EVENT_NAME)
   start () {
-    this.el.dispatchEvent(new CustomEvent(STARTED_EVENT_NAME))
+    this.el.dispatchEvent(new CustomEvent(STARTED_EVENT_NAME, { bubbles: true }))
 
     // finish immediately if the array is empty
     if (this.array.length === 0) {
@@ -39,7 +39,7 @@ export class Puncher {
     }
 
     return new Promise(resolve => this.loop(resolve)).then(() => {
-      this.el.dispatchEvent(new CustomEvent(ENDED_EVENT_NAME))
+      this.el.dispatchEvent(new CustomEvent(ENDED_EVENT_NAME, { bubbles: true }))
     })
   }
 
@@ -72,7 +72,7 @@ export class Puncher {
       this.$el.append(item)
 
       item.cc()
-      item[0].dispatchEvent(new CustomEvent(APPENDED_EVENT_NAME))
+      item[0].dispatchEvent(new CustomEvent(APPENDED_EVENT_NAME, { bubbles: true }))
     }
   }
 }
